@@ -5,9 +5,10 @@ import { RedSocialModule } from './red-social/red-social.module';
 import { FotoModule } from './foto/foto.module';
 import { UsuarioModule } from './usuario/usuario.module';
 import { AlbumModule } from './album/album.module';
+import { PhotoAlbumModule } from './photo-album/photo-album.module';
 
 @Module({
-  imports: [RedSocialModule, FotoModule, UsuarioModule, AlbumModule],
+  imports: [RedSocialModule, FotoModule, UsuarioModule, AlbumModule, PhotoAlbumModule],
   controllers: [AppController],
   providers: [AppService],
 })

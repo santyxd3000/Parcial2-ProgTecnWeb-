@@ -10,3 +10,12 @@ export class AppController {
     return this.appService.getHello();
   }
 }
+
+/*Clases que toca crear
+
+RedSocialEntity
+Foto
+Usuario
+Album
+*/
+

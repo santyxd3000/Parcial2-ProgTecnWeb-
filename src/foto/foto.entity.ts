@@ -1,5 +1,7 @@
+import { AlbumEntity } from "src/album/album.entity";
+import { RedSocialEntity } from "src/red-social/red-social.entity";
 import internal from "stream";
-import { Entity, PrimaryGeneratedColumn,Column, IntegerType } from "typeorm";
+import { Entity, PrimaryGeneratedColumn,Column, IntegerType, ManyToOne } from "typeorm";
 
 @Entity()
 export class FotoEntity {
@@ -15,4 +17,10 @@ export class FotoEntity {
 
     @PrimaryGeneratedColumn('uuid')
     id: string
+
+    @ManyToOne(() => RedSocialEntity, redSocial => redSocial.fotos)
+    redSocial: RedSocialEntity;
+
+    @ManyToOne(() => AlbumEntity, album => album.fotos)
+    album: AlbumEntity;
 }

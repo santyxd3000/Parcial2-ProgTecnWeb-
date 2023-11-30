@@ -1,4 +1,6 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { UsuarioEntity } from "src/usuario/usuario.entity";
+import { FotoEntity } from "src/foto/foto.entity";
 
 @Entity()
 export class AlbumEntity {
@@ -16,6 +18,10 @@ export class AlbumEntity {
     titulo: String
 
 
+    @ManyToOne(() => UsuarioEntity, usuario => usuario.albums)
+    usuario: UsuarioEntity;
 
+    @OneToMany(() => FotoEntity, foto => foto.album)
+    fotos: FotoEntity[];
 
 }

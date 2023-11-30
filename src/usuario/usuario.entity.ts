@@ -1,4 +1,6 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { AlbumEntity } from "src/album/album.entity";
+import { RedSocialEntity } from "src/red-social/red-social.entity";
+import { Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
 
 @Entity()
@@ -11,4 +13,11 @@ export class UsuarioEntity {
 
     @Column()
     telefono: string
+
+
+    @ManyToOne(() => RedSocialEntity, redSocial => redSocial.usuarios)
+    redSocial: RedSocialEntity;
+
+    @OneToMany(() => AlbumEntity, album => album.usuario)
+    albums: AlbumEntity[];
 }

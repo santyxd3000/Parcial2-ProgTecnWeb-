@@ -71,7 +71,19 @@ Get album - Error 2: Verificar que se elimina el album al aliminar la última fo
 
 Add RedSocial: Crea una nueva red social, prueba exitosa.
 
-Add RedSocial - Error 1: 
+Add RedSocial - Error 1: Crea una red social con un slogan vacío, prueba no exitosa, verificada con cross-validator
+
+Add RedSocial - Error 2: Crea una red social con slogan menor a 20 caracteres, por lo que es una prueba no exitosa.
 
 
 ## USUARIO
+
+Add Usuario: Crea un nuevo usuario exitosamente con un nuevo id.
+
+Add Usuario - Error 1: Crea un usuario con un teléfono diferente de 10 dígitos, prueba no exitosa debido a la regla de negocio.
+
+Get Usuario: Obtiene un usuario exitosammente dado que el id existe
+
+Get Usuario - Error 1: Obtiene un usuario con id no existente, prueba no exitosa
+
+Get All Usuarios: Obtiene todos los usuarios existentes, prueba exitosa.

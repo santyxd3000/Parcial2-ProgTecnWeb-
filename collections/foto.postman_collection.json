@@ -1,0 +1,674 @@
+{
+	"info": {
+		"_postman_id": "a673195f-365d-4787-bbde-e9c9c0cc23ad",
+		"name": "foto",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+    "item": [
+        {
+            "name": "Add Photo",
+            "event": [
+                {
+                    "listen": "test",
+                    "script": {
+                        "exec": [
+                            "var data = pm.response.json()",
+                            "pm.globals.set(\"idFoto\", data.id);",
+                            "",
+                            "pm.test(\"Status code is 201\", function () {",
+                            "   pm.response.to.have.status(201);",
+                            "});"
+                        ],
+                        "type": "text/javascript"
+                    }
+                }
+            ],
+            "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n    \"ISO\": 100,\n    \"velObturacion\": 2,\n    \"apertura\": 1,\n    \"fecha\": \"2020-11-01\"\n}",
+                    "options": {
+                        "raw": {
+                            "language": "json"
+                        }
+                    }
+                },
+                "url": {
+                    "raw": "{{baseURL}}/fotos",
+                    "host": [
+                        "{{baseURL}}"
+                    ],
+                    "path": [
+                        "fotos"
+                    ]
+                },
+                "description": "Crea una foto nueva con éxito.\n\nCódigo HTTP: 201"
+            },
+            "response": []
+        },
+        {
+            "name": "Add Photo - iso error",
+            "event": [
+                {
+                    "listen": "test",
+                    "script": {
+                        "exec": [
+                            "pm.test(\"Status code is 412\", function () {",
+                            "   pm.response.to.have.status(412);",
+                            "});",
+                            "",
+                            "pm.test(\"Get expected error message\", function () {",
+                            "   var data = pm.response.json();",
+                            "   pm.expect(data.message).to.eql('Invalid ISO');",
+                            "});"
+                        ],
+                        "type": "text/javascript"
+                    }
+                }
+            ],
+            "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n    \"ISO\": 6500,\n    \"velObturacion\": 2,\n    \"apertura\": 1,\n    \"fecha\": \"2020-11-01\"\n}",
+                    "options": {
+                        "raw": {
+                            "language": "json"
+                        }
+                    }
+                },
+                "url": {
+                    "raw": "{{baseURL}}/fotos",
+                    "host": [
+                        "{{baseURL}}"
+                    ],
+                    "path": [
+                        "fotos"
+                    ]
+                },
+                "description": "Intenta crear foto con iso inválido, prueba no exitosa.\n\nCódigo HTTP: 412"
+            },
+            "response": []
+        },
+        {
+            "name": "Add Photo - velObturacion Error",
+            "event": [
+                {
+                    "listen": "test",
+                    "script": {
+                        "exec": [
+                            "pm.test(\"Status code is 412\", function () {",
+                            "   pm.response.to.have.status(412);",
+                            "});",
+                            "",
+                            "pm.test(\"Get expected error message\", function () {",
+                            "   var data = pm.response.json();",
+                            "   pm.expect(data.message).to.eql('Invalid velObturacion');",
+                            "});"
+                        ],
+                        "type": "text/javascript"
+                    }
+                }
+            ],
+            "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n    \"ISO\": 100,\n    \"velObturacion\": 260,\n    \"apertura\": 1,\n    \"fecha\": \"2020-11-01\"\n}",
+                    "options": {
+                        "raw": {
+                            "language": "json"
+                        }
+                    }
+                },
+                "url": {
+                    "raw": "{{baseURL}}/fotos",
+                    "host": [
+                        "{{baseURL}}"
+                    ],
+                    "path": [
+                        "fotos"
+                    ]
+                },
+                "description": "Intenta crear foto con velObturacion inválido, prueba no exitosa \n\nCódigo HTTP: 412"
+            },
+            "response": []
+        },
+        {
+            "name": "Add Photo - Apertura Error",
+            "event": [
+                {
+                    "listen": "test",
+                    "script": {
+                        "exec": [
+                            "pm.test(\"Status code is 412\", function () {",
+                            "   pm.response.to.have.status(412);",
+                            "});",
+                            "",
+                            "pm.test(\"Get expected error message\", function () {",
+                            "   var data = pm.response.json();",
+                            "   pm.expect(data.message).to.eql('Invalid apertura');",
+                            "});"
+                        ],
+                        "type": "text/javascript"
+                    }
+                }
+            ],
+            "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n    \"ISO\": 100,\n    \"velObturacion\": 2,\n    \"apertura\": 35,\n    \"fecha\": \"2020-11-01\"\n}",
+                    "options": {
+                        "raw": {
+                            "language": "json"
+                        }
+                    }
+                },
+                "url": {
+                    "raw": "{{baseURL}}/fotos",
+                    "host": [
+                        "{{baseURL}}"
+                    ],
+                    "path": [
+                        "fotos"
+                    ]
+                },
+                "description": "Intenta crear foto con apertura inválido, prueba no exitosa.\n\nCódigo HTTP: 412"
+            },
+            "response": []
+        },
+        {
+            "name": "Add Photo - Media inválida",
+            "event": [
+                {
+                    "listen": "test",
+                    "script": {
+                        "exec": [
+                            "pm.test(\"Status code is 412\", function () {",
+                            "   pm.response.to.have.status(412);",
+                            "});",
+                            "",
+                            "pm.test(\"Get expected error message\", function () {",
+                            "   var data = pm.response.json();",
+                            "   pm.expect(data.message).to.eql('Máximo 2 valores deben estar por encima del valor medio de sus cotas');",
+                            "});"
+                        ],
+                        "type": "text/javascript"
+                    }
+                }
+            ],
+            "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n    \"ISO\": 6400,\n    \"velObturacion\": 250,\n    \"apertura\": 32,\n    \"fecha\": \"2020-11-01\"\n}",
+                    "options": {
+                        "raw": {
+                            "language": "json"
+                        }
+                    }
+                },
+                "url": {
+                    "raw": "{{baseURL}}/fotos",
+                    "host": [
+                        "{{baseURL}}"
+                    ],
+                    "path": [
+                        "fotos"
+                    ]
+                },
+                "description": "Intenta crear una foto sin cumplir la resricción de cumplir las dos medias. Prueba no exitosa\n\nCódigo HTTP: 412"
+            },
+            "response": []
+        },
+        {
+            "name": "Get Photo - Id",
+            "event": [
+                {
+                    "listen": "test",
+                    "script": {
+                        "exec": [
+                            "pm.test(\"Status code is 200\", function () {",
+                            "   pm.response.to.have.status(200);",
+                            "});"
+                        ],
+                        "type": "text/javascript"
+                    }
+                }
+            ],
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "request": {
+                "method": "GET",
+                "header": [],
+                "body": {
+                    "mode": "raw",
+                    "raw": "",
+                    "options": {
+                        "raw": {
+                            "language": "json"
+                        }
+                    }
+                },
+                "url": {
+                    "raw": "{{baseURL}}/fotos/{{idFoto}}",
+                    "host": [
+                        "{{baseURL}}"
+                    ],
+                    "path": [
+                        "fotos",
+                        "{{idFoto}}"
+                    ]
+                },
+                "description": " Obtiene una foto con id existente, prueba exitosa\".\n\nCódigo HTTP: 200"
+            },
+            "response": []
+        },
+        {
+            "name": "Get Photo - Error",
+            "event": [
+                {
+                    "listen": "test",
+                    "script": {
+                        "exec": [
+                            "pm.test(\"Status code is 404\", function () {",
+                            "   pm.response.to.have.status(404);",
+                            "});",
+                            "",
+                            "pm.test(\"Get expected error message\", function () {",
+                            "   var data = pm.response.json();",
+                            "   pm.expect(data.message).to.eql(\"The foto with the given id was not found\");",
+                            "});"
+                        ],
+                        "type": "text/javascript"
+                    }
+                }
+            ],
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "request": {
+                "method": "GET",
+                "header": [],
+                "body": {
+                    "mode": "raw",
+                    "raw": "",
+                    "options": {
+                        "raw": {
+                            "language": "json"
+                        }
+                    }
+                },
+                "url": {
+                    "raw": "{{baseURL}}/fotos/00000000-0000-0000-0000-000000000000",
+                    "host": [
+                        "{{baseURL}}"
+                    ],
+                    "path": [
+                        "fotos",
+                        "00000000-0000-0000-0000-000000000000"
+                    ]
+                },
+                "description": "Obtiene una foto con id inexistente, prueba no exitosa\".\n\nCódigo HTTP: 404"
+            },
+            "response": []
+        },
+        {
+            "name": "Get all photos",
+            "event": [
+                {
+                    "listen": "test",
+                    "script": {
+                        "exec": [
+                            "pm.test(\"Status code is 200\", function () {",
+                            "   pm.response.to.have.status(200);",
+                            "});"
+                        ],
+                        "type": "text/javascript"
+                    }
+                }
+            ],
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "request": {
+                "method": "GET",
+                "header": [],
+                "body": {
+                    "mode": "raw",
+                    "raw": "",
+                    "options": {
+                        "raw": {
+                            "language": "json"
+                        }
+                    }
+                },
+                "url": {
+                    "raw": "{{baseURL}}/fotos",
+                    "host": [
+                        "{{baseURL}}"
+                    ],
+                    "path": [
+                        "fotos"
+                    ]
+                },
+                "description": "Obtiene todas las fotos creadas.\n\nCódigo HTTP: 200"
+            },
+            "response": []
+        },
+        {
+            "name": "Delete Foto",
+            "event": [
+                {
+                    "listen": "test",
+                    "script": {
+                        "exec": [
+                            "pm.test(\"Status code is 204\", function () {",
+                            "   pm.response.to.have.status(204);",
+                            "});"
+                        ],
+                        "type": "text/javascript"
+                    }
+                }
+            ],
+            "request": {
+                "method": "DELETE",
+                "header": [],
+                "body": {
+                    "mode": "raw",
+                    "raw": "",
+                    "options": {
+                        "raw": {
+                            "language": "json"
+                        }
+                    }
+                },
+                "url": {
+                    "raw": "{{baseURL}}/fotos/{{idFoto}}",
+                    "host": [
+                        "{{baseURL}}"
+                    ],
+                    "path": [
+                        "fotos",
+                        "{{idFoto}}"
+                    ]
+                },
+                "description": "Elimina una foto existente, prueba exitosa.\n\nCódigo HTTP: 204"
+            },
+            "response": []
+        },
+        {
+            "name": "Delete Photo - Error",
+            "event": [
+                {
+                    "listen": "test",
+                    "script": {
+                        "exec": [
+                            "pm.test(\"Status code is 404\", function () {",
+                            "   pm.response.to.have.status(404);",
+                            "});",
+                            "",
+                            "pm.test(\"Get expected error message\", function () {",
+                            "   var data = pm.response.json();",
+                            "   pm.expect(data.message).to.eql(\"The foto with the given id was not found\");",
+                            "});"
+                        ],
+                        "type": "text/javascript"
+                    }
+                }
+            ],
+            "request": {
+                "method": "DELETE",
+                "header": [],
+                "body": {
+                    "mode": "raw",
+                    "raw": "",
+                    "options": {
+                        "raw": {
+                            "language": "json"
+                        }
+                    }
+                },
+                "url": {
+                    "raw": "{{baseURL}}/fotos/00000000-0000-0000-0000-000000000000",
+                    "host": [
+                        "{{baseURL}}"
+                    ],
+                    "path": [
+                        "fotos",
+                        "00000000-0000-0000-0000-000000000000"
+                    ]
+                },
+                "description": "Elimina una foto no existente, prueba no exitosa.\n\nCódigo HTTP: 404"
+            },
+            "response": []
+        },
+        {
+            "name": "Add Album - 2",
+            "event": [
+                {
+                    "listen": "test",
+                    "script": {
+                        "exec": [
+                            "var data = pm.response.json()",
+                            "pm.globals.set(\"idAlbum3\", data.id);",
+                            "",
+                            "pm.test(\"Status code is 201\", function () {",
+                            "   pm.response.to.have.status(201);",
+                            "});"
+                        ],
+                        "type": "text/javascript"
+                    }
+                }
+            ],
+            "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n    \"fechaInicio\": \"2020-10-25\",\n    \"fechaFin\": \"2020-11-25\",\n    \"titulo\": \"Primer album\"\n}",
+                    "options": {
+                        "raw": {
+                            "language": "json"
+                        }
+                    }
+                },
+                "url": {
+                    "raw": "{{baseURL}}/albums",
+                    "host": [
+                        "{{baseURL}}"
+                    ],
+                    "path": [
+                        "albums"
+                    ]
+                },
+                "description": "Crea nuevo album para asociar con foto.\n\nCódigo HTTP: 201"
+            },
+            "response": []
+        },
+        {
+            "name": "Add Photo 2",
+            "event": [
+                {
+                    "listen": "test",
+                    "script": {
+                        "exec": [
+                            "var data = pm.response.json()",
+                            "pm.globals.set(\"idFoto3\", data.id);",
+                            "",
+                            "pm.test(\"Status code is 201\", function () {",
+                            "   pm.response.to.have.status(201);",
+                            "});"
+                        ],
+                        "type": "text/javascript"
+                    }
+                }
+            ],
+            "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n    \"ISO\": 100,\n    \"velObturacion\": 2,\n    \"apertura\": 1,\n    \"fecha\": \"2020-11-01\"\n}",
+                    "options": {
+                        "raw": {
+                            "language": "json"
+                        }
+                    }
+                },
+                "url": {
+                    "raw": "{{baseURL}}/fotos",
+                    "host": [
+                        "{{baseURL}}"
+                    ],
+                    "path": [
+                        "fotos"
+                    ]
+                },
+                "description": "Crea una nueva foto para asociar con album - prueba exitosa.\n\nCódigo HTTP: 201"
+            },
+            "response": []
+        },
+        {
+            "name": "Add Photo Album",
+            "event": [
+                {
+                    "listen": "test",
+                    "script": {
+                        "exec": [
+                            "pm.test(\"Status code is 201\", function () {",
+                            "   pm.response.to.have.status(201);",
+                            "});"
+                        ],
+                        "type": "text/javascript"
+                    }
+                }
+            ],
+            "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                    "mode": "raw",
+                    "raw": "",
+                    "options": {
+                        "raw": {
+                            "language": "json"
+                        }
+                    }
+                },
+                "url": {
+                    "raw": "{{baseURL}}/albums/{{idAlbum3}}/fotos/{{idFoto3}}",
+                    "host": [
+                        "{{baseURL}}"
+                    ],
+                    "path": [
+                        "albums",
+                        "{{idAlbum3}}",
+                        "fotos",
+                        "{{idFoto3}}"
+                    ]
+                },
+                "description": "Añade una foto a un album, prueba exitosa dado que se encuentran ambos ids.\n\nCódigo HTTP: 201"
+            },
+            "response": []
+        },
+        {
+            "name": "Delete last photo album",
+            "event": [
+                {
+                    "listen": "test",
+                    "script": {
+                        "exec": [
+                            "pm.test(\"Status code is 204\", function () {",
+                            "   pm.response.to.have.status(204);",
+                            "});"
+                        ],
+                        "type": "text/javascript"
+                    }
+                }
+            ],
+            "request": {
+                "method": "DELETE",
+                "header": [],
+                "body": {
+                    "mode": "raw",
+                    "raw": "",
+                    "options": {
+                        "raw": {
+                            "language": "json"
+                        }
+                    }
+                },
+                "url": {
+                    "raw": "{{baseURL}}/fotos/{{idFoto3}}",
+                    "host": [
+                        "{{baseURL}}"
+                    ],
+                    "path": [
+                        "fotos",
+                        "{{idFoto3}}"
+                    ]
+                },
+                "description": "Elimina la última foto del album con éxito.\n\nCódigo HTTP: 204"
+            },
+            "response": []
+        },
+        {
+            "name": "Get album - Error 2",
+            "event": [
+                {
+                    "listen": "test",
+                    "script": {
+                        "exec": [
+                            "pm.test(\"Status code is 404\", function () {",
+                            "   pm.response.to.have.status(404);",
+                            "});",
+                            "",
+                            "pm.test(\"Get expected error message\", function () {",
+                            "   var data = pm.response.json();",
+                            "   pm.expect(data.message).to.eql(\"The album with the given id was not found\");",
+                            "});"
+                        ],
+                        "type": "text/javascript"
+                    }
+                }
+            ],
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "request": {
+                "method": "GET",
+                "header": [],
+                "body": {
+                    "mode": "raw",
+                    "raw": "",
+                    "options": {
+                        "raw": {
+                            "language": "json"
+                        }
+                    }
+                },
+                "url": {
+                    "raw": "{{baseURL}}/albums/{{idAlbum3}}",
+                    "host": [
+                        "{{baseURL}}"
+                    ],
+                    "path": [
+                        "albums",
+                        "{{idAlbum3}}"
+                    ]
+                },
+                "description": "Verificar que se elimina el album al aliminar la última foto.\n\nCódigo HTTP: 404"
+            },
+            "response": []
+        }
+    ]
+}

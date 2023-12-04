@@ -1,4 +1,3 @@
-import { FotoEntity } from "src/foto/foto.entity";
 import { UsuarioEntity } from "src/usuario/usuario.entity";
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
@@ -15,7 +14,4 @@ export class RedSocialEntity {
 
     @OneToMany(() => UsuarioEntity, usuario => usuario.redSocial)
     usuarios: UsuarioEntity[];
-
-    @OneToMany(() => FotoEntity, foto => foto.redSocial)
-    fotos: FotoEntity[];
 }

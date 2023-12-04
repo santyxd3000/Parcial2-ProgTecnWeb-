@@ -13,14 +13,14 @@ export class UsuarioService {
 
 
         async createUsuario(usuario: UsuarioEntity): Promise<UsuarioEntity> {
-        if (usuario.telefono.length > 10){
-            throw new BusinessLogicException("The telephone can't have more than 20 characters", BusinessError.VALIDATION_FAILED);
+        if (usuario.telefono.length != 10){
+            throw new BusinessLogicException("The telephone can't have more or less than 10 characters", BusinessError.VALIDATION_FAILED);
         }
             return await this.usuarioRepository.save(usuario);}
     
 
         async findUsuariobyId(id: string): Promise<UsuarioEntity> {
-                const usuario: UsuarioEntity = await this.usuarioRepository.findOne({where: {id}, relations: ["redSocial","albums"] } );
+                const usuario: UsuarioEntity = await this.usuarioRepository.findOne({where: {id}, relations: ["redSocial","fotos"] } );
                 if (!usuario)
                   throw new BusinessLogicException("The user with the given id was not found", BusinessError.NOT_FOUND);
            
@@ -28,6 +28,6 @@ export class UsuarioService {
         }
 
         async findAllUsuarios(): Promise<UsuarioEntity[]> {
-            return await this.usuarioRepository.find({ relations: ["redSocial","albums"] });
+            return await this.usuarioRepository.find({ relations: ["redSocial","fotos"] });
         }
 }

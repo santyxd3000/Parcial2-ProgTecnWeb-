@@ -12,7 +12,7 @@ export class RedSocialService {
         ){}
 
         async createLibreria(redSocial: RedSocialEntity): Promise<RedSocialEntity> {
-            if (redSocial.slogan.length == 0 || redSocial.slogan.length < 20){
+            if (redSocial.slogan.length == 0 || redSocial.slogan.length > 20){
                 throw new BusinessLogicException("Conditions not validated", BusinessError.VALIDATION_FAILED);
             }
             return await this.redSocialRepository.save(redSocial);

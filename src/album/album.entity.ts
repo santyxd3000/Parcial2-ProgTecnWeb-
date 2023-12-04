@@ -17,10 +17,6 @@ export class AlbumEntity {
     @Column()
     titulo: String
 
-
-    @ManyToOne(() => UsuarioEntity, usuario => usuario.albums)
-    usuario: UsuarioEntity;
-
     @OneToMany(() => FotoEntity, foto => foto.album)
     fotos: FotoEntity[];
 
